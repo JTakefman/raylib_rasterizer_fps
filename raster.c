@@ -10,62 +10,52 @@
 *   Copyright (c) 2015-2023 Ramon Santamaria (@raysan5)
 *
 ********************************************************************************************/
-
-#include "raylib.h"
-#include "rcamera.h"
-
-#define MAX_COLUMNS 20
-#define min(a, b) ((a) < (b) ? (a) : (b))
-#define max(a, b) ((a) > (b) ? (a) : (b))
-
-//------------------------------------------------------------------------------------
-// Program main entry point
-//------------------------------------------------------------------------------------
-
-void DrawWireFrameTriangle(Vector2 p0, Vector2 p1, Vector2 p2, Color color) {
-
-    DrawLineV(p0, p1, color);
-    DrawLineV(p1, p2, color);
-    DrawLineV(p2, p0, color);
-}
-
-
-
-void FillTriangle(Vector2 p0, Vector2 p1, Vector2 p2, Color color) {
-
-    float maxY, minY = p0.y;
-    float maxX, minX = p0.x;
-
-    maxY = max(maxY, p1.y); maxY = max(maxY, p2.y);
-    minY = min(minY, p1.y); minY = min(minY, p2.y);
-
-
-}
+#include "utility.c"
 
 int main(void)
-{
-    const int screenWidth = 1200;
-    const int screenHeight = 675;
+{  
+    char args = 'c';
+    Vector2 p0 = (Vector2){0, 3};
+    Vector2 p1 = (Vector2){200, 500};
 
-    Vector2 p1 = (Vector2){0, 0};
-    Vector2 p2 = (Vector2){800, 50};
+    printLineABC(convertToLine(p0, p1));
+    printLineMXB(convertToLine(p0, p1));
 
-    Vector2 p3 = (Vector2){1100, 550};
 
+    LineMXB l1 = (LineMXB){-3, 2};
+    LineMXB l2 = (LineMXB){0, 8.3};
+
+    Vector2 testVec = getPoiMXB(l1, l2);
+
+    printf("Poi of lines is    x: %f     y:   %f", testVec.x, testVec.y);
+
+    printf("enter any character");
+
+    scanf("%c", &args);
+
+
+    /*
     InitWindow(screenWidth, screenHeight, "raylib [core] example - 3d camera first person");
 
-
+    
     while (!WindowShouldClose())        // Detect window close button or ESC key
     {
          BeginDrawing();
+            RasterDrawPlane(screenWidth, screenHeight);
+            Vector2 p0 = (Vector2){0, 0};
+            Vector2 p1 = (Vector2){500, 200};
+            DrawMid(p0, p1, RED);
+            DrawLineEx(p0, p1, 3.0, BLUE);
 
-            DrawWireFrameTriangle(p1, p2, p3, GREEN);
-            
+            Line l = convertToLine(LeftToMidCoords(p0), LeftToMidCoords(p1));
+
+            printLineABC(l);
+            printLineMXB(l);
          EndDrawing();
         
-    }
+    }*/
     //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
+    //CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;
