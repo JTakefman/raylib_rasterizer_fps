@@ -15,45 +15,31 @@
 int main(void)
 {  
     char args = 'c';
-    Vector2 p0 = (Vector2){0, 3};
-    Vector2 p1 = (Vector2){200, 500};
+    Vector2 p0 = (Vector2){0, 0};
+    Vector2 p1 = (Vector2){0, 300};
+    Vector2 p2 = (Vector2){300, 150};
 
-    printLineABC(convertToLine(p0, p1));
-    printLineMXB(convertToLine(p0, p1));
-
-
-    LineMXB l1 = (LineMXB){-3, 2};
-    LineMXB l2 = (LineMXB){0, 8.3};
-
-    Vector2 testVec = getPoiMXB(l1, l2);
-
-    printf("Poi of lines is    x: %f     y:   %f", testVec.x, testVec.y);
-
-    printf("enter any character");
-
-    scanf("%c", &args);
-
-
-    /*
+    
     InitWindow(screenWidth, screenHeight, "raylib [core] example - 3d camera first person");
 
     
-    while (!WindowShouldClose())        // Detect window close button or ESC key
+    while (!WindowShouldClose() && args != 'q')        // Detect window close button or ESC key
     {
          BeginDrawing();
-            RasterDrawPlane(screenWidth, screenHeight);
-            Vector2 p0 = (Vector2){0, 0};
-            Vector2 p1 = (Vector2){500, 200};
-            DrawMid(p0, p1, RED);
-            DrawLineEx(p0, p1, 3.0, BLUE);
+            ClearBackground(BLACK);
+            DrawWireFrameTriangle(p0, p1, p2, RED);
+            DrawWireFrameTriangleMXB(p0, p1, p2, BLUE);
+            
+            FillTriangle(p0,p1,p2, RED);
+            FillTriangle(MidToLeftCoords(p0),MidToLeftCoords(p1),MidToLeftCoords(p2), PURPLE);
 
-            Line l = convertToLine(LeftToMidCoords(p0), LeftToMidCoords(p1));
-
-            printLineABC(l);
-            printLineMXB(l);
          EndDrawing();
+
+        //printf("\n\n enter any character: ");
+        //scanf("%c", &args);
         
-    }*/
+    }
+    
     //--------------------------------------------------------------------------------------
     //CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
